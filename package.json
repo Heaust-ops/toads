@@ -1,0 +1,50 @@
+{
+  "name": "babylon-deferred-lights",
+  "version": "2.0.0",
+  "description": "A deferred lighting solution for babylonjs",
+  "author": "heaust-ops",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Heaust-ops/babylon-deferred-lights/issues"
+  },
+  "homepage": "https://github.com/Heaust-ops/babylon-deferred-lights#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Heaust-ops/babylon-deferred-lights.git"
+  },
+  "main": "./dist/deferredLighting.cjs.js",
+  "module": "./dist/deferredLighting.es.js",
+  "types": "./dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "typescript",
+    "javascript",
+    "sound",
+    "webgl",
+    "babylonjs",
+    "lights",
+    "performance",
+    "deferred",
+    "shading"
+  ],
+  "type": "module",
+  "scripts": {
+    "dev": "vite --config vite.demo.config.ts",
+    "build": "rm -rf dist && tsc && vite build",
+    "preview": "vite preview",
+    "build:demo": "vite build --config vite.demo.config.ts"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.3",
+    "vite": "^5.4.8",
+    "vite-plugin-dts": "^4.2.4",
+    "vite-plugin-glsl": "^1.3.0"
+  },
+  "peerDependencies": {},
+  "dependencies": {
+    "@math.gl/core": "^4.1.0",
+    "@math.gl/types": "^4.1.0"
+  }
+}
