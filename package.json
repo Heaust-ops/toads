@@ -1,19 +1,19 @@
 {
-  "name": "babylon-deferred-lights",
+  "name": "toads",
   "version": "2.0.0",
-  "description": "A deferred lighting solution for babylonjs",
+  "description": "a framework agnostic compute node library for vanillajs primarily to be used for webgl / shader editors ",
   "author": "heaust-ops",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Heaust-ops/babylon-deferred-lights/issues"
+    "url": "https://github.com/Heaust-ops/toads/issues"
   },
-  "homepage": "https://github.com/Heaust-ops/babylon-deferred-lights#readme",
+  "homepage": "https://github.com/Heaust-ops/toads#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Heaust-ops/babylon-deferred-lights.git"
+    "url": "git+https://github.com/Heaust-ops/toads.git"
   },
-  "main": "./dist/deferredLighting.cjs.js",
-  "module": "./dist/deferredLighting.es.js",
+  "main": "./dist/toads.cjs.js",
+  "module": "./dist/toads.es.js",
   "types": "./dist/types/index.d.ts",
   "files": [
     "dist"
@@ -21,13 +21,12 @@
   "keywords": [
     "typescript",
     "javascript",
-    "sound",
     "webgl",
     "babylonjs",
-    "lights",
-    "performance",
-    "deferred",
-    "shading"
+    "node",
+    "editor",
+    "flow",
+    "graph"
   ],
   "type": "module",
   "scripts": {
