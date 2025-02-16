@@ -11,8 +11,12 @@ class Camera extends TransformNode {
     this.scaling.y = a;
   }
 
-  setTransform(ctx: CanvasRenderingContext2D) {
+  getViewMatrix() {
     const m = this.getAbsoluteWM().clone().invert();
+    return m;
+  }
+  setTransform(ctx: CanvasRenderingContext2D) {
+    const m = this.getViewMatrix();
 
     ctx.setTransform(
       m.getElement(0, 0),

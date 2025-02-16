@@ -6,7 +6,7 @@ export const drawGrid = (ctx: CanvasRenderingContext2D, camera: Camera) => {
   gridSpacing /= camera.getZoomLevel();
 
   const gridStartOffset = new Vector2(0, 0);
-  gridStartOffset.add(camera.position);
+  gridStartOffset.subtract(camera.position);
   gridStartOffset.x %= gridSpacing;
   gridStartOffset.y %= gridSpacing;
 

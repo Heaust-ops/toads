@@ -4,6 +4,7 @@ import { UID } from "./math/uid";
 import { Observable } from "./math/observable";
 import { drawGrid } from "./drawing/grid";
 import { drawSelectionMarquee } from "./drawing/selection";
+import { RenderableI } from "./interfaces/renderable";
 
 class Scene {
   uid = new UID();
@@ -17,8 +18,8 @@ class Scene {
   camera: Camera;
   pointer: Vector2;
   //
-  onBeforeRenderObservable = new Observable();
-  onAfterRenderObservable = new Observable();
+  onBeforeRenderObservable = new Observable<null>();
+  onAfterRenderObservable = new Observable<null>();
   //
   hardwareScale = 1;
   pointerDelta: Vector2;
@@ -69,8 +70,24 @@ class Scene {
     /** background */
     ctx.fillStyle = "#1e1e1e";
     ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-
     if (this.style.grid) drawGrid(this.ctx, this.camera);
+
+    /**
+     * render everything
+     */
+    const items = this.uid
+      .getAllItems()
+      .filter(
+        (el) =>
+          !!(el as Partial<RenderableI>).render &&
+          (el as Partial<RenderableI>).isVisible,
+      ) as RenderableI[];
+
+    items.forEach((item) => {
+      item.render();
+    });
+
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
     if (this.activePointer.left) {
       drawSelectionMarquee(this.ctx, this.selectionStart, this.pointer);
     }
@@ -128,7 +145,10 @@ class Scene {
       updatePointer(e);
 
       if (this.activePointer.right) {
-        this.camera.position.add(this.pointerDelta);
+        const d = this.pointerDelta.clone();
+        d.x *= -1;
+        d.y *= -1;
+        this.camera.position.add(d);
       }
     });
     this.canvas.oncontextmenu = () => {

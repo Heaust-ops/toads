@@ -1,9 +1,11 @@
 import { Matrix3, Vector2 } from "@math.gl/core";
-import { DisposableI } from "./disposable";
 import { Observable } from "./observable";
 import { Scene } from "../scene";
+import { DisposableI } from "../interfaces/disposable";
 
 class TransformNode implements DisposableI {
+  protected width = 0;
+  protected height = 0;
   /**
    * DISPOSE
    */
@@ -17,7 +19,7 @@ class TransformNode implements DisposableI {
    * TRANSFORMS
    */
   position = new Vector2();
-  scaling = new Vector2();
+  scaling = new Vector2(1, 1);
   rotation = 0;
 
   private wm = Matrix3.IDENTITY.clone();
@@ -28,13 +30,20 @@ class TransformNode implements DisposableI {
 
   computeWM() {
     this.wm = Matrix3.IDENTITY.clone()
-      .translate(this.position)
+      .scale(this.scaling)
       .rotate(this.rotation)
-      .scale(this.scaling);
+      .translate(this.position);
   }
 
-  setTransform(ctx: CanvasRenderingContext2D, view = null as null | Matrix3) {
-    view = view ?? Matrix3.IDENTITY;
+  setTransform(
+    ctx: CanvasRenderingContext2D,
+    view = false as Matrix3 | boolean,
+  ) {
+    if (view && typeof view === "boolean") {
+      view = this.scene.camera.getViewMatrix();
+    }
+
+    view = view || Matrix3.IDENTITY;
     const m = this.getAbsoluteWM().multiplyRight(view);
 
     ctx.setTransform(

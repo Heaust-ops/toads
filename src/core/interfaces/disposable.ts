@@ -1,4 +1,4 @@
-import { Observable } from "./observable";
+import { Observable } from "../math/observable";
 
 export interface DisposableI {
   dispose: () => void;

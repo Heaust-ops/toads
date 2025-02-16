@@ -1,8 +1,12 @@
-import { DisposableI } from "./disposable";
+import { DisposableI } from "../interfaces/disposable";
 
 export class UID {
   private curr = -1;
   private record = {} as Record<number, unknown>;
+
+  getAllItems() {
+    return Object.values(this.record);
+  }
 
   gen(ref: DisposableI | unknown) {
     this.curr++;
